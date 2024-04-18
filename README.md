@@ -1,59 +1,65 @@
-# F_Record
-一款用来录制绘画过程的轻量级PS插件。  
-插件原理：调用PS生成器的接口，当画布发生变化时截取过程图片，最后将图片连起来生成录像。  
-支持版本：PS 2019及以后（感谢srylyx帮忙兼容）  
-支持系统：Windows、Mac（github上暂时只放了Windows）  
-Github：https://github.com/F-know/F_Record  
-网盘下载：https://pan.quark.cn/s/d3aaf46abc5e  
-免责声明：该插件不保证能让任何电脑都能完美运行不出bug，所以对于重要的录制过程请做好Plan B，否则造成的损失我不负责哦，毕竟是免费的。看完下面所有内容还有问题可以来b站（id：F_know）私信我，看到后会回复。  
-PS插件开发博客：https://uiscripting.com  这个插件的所有内容都是我跟着这位大佬写的博客一步步完成的，耗时一周。  
-## 安装方法
-如果之前安装了1.0版本的请先把1.0删掉。同一个绘画过程不要两个版本各录一部分。  
-下面这些路径PS没有自带的话就自己新建一个出来就行。  
-### win
-将F_Record-CEP放在/Adobe Photoshop/Required/CEP/extensions中  
-将F_Record-generator放在/Adobe Photoshop/Plug-ins/Generator中  
-### mac
-将F_Record-CEP放在/Users/{用户名}/Library/Application Support/Adobe/CEP/extensions中  
-将F_Record-generator放在/Adobe Photoshop/Plug-ins/Generator中  
-  
-最后打开PS，编辑-首选项-增效工具-启用生成器（勾上）、载入扩展面板（勾上），重启PS，在最上面一栏的 窗口-扩展 就能找到插件了。  
-## 插件界面的参数介绍
-路径：这里填保存过程图片和输出录像的路径，不是插件安装的位置。随便在哪儿新建一个文件夹，把路径复制进去就行。  
-已保存图片数：已保存的过程图片数量。开始录制后会随着操作进行逐渐增加。  
-最小保存间隔：用来控制保存图片的频率，通常设为0就行。如果画布较大（如5000*5000像素以上，当然也看你电脑性能），保存图片的用时较长，相当于最小保存间隔会比较大。  
-录像时长：用来控制最后输出的录像的时间，可以录制好后再填写，建议5分钟以内，与生成录像花费的时间正相关（当然你不介意多等一会儿也行）。  
-## 常见问题
-问：插件提示未经正确签署？  
-答：里面有文件被修改或者损坏了，先重新下载试试，还是不行可以百度一下，网上有许多解决办法。  
-问：按照上面的教程安装，插件没在扩展中找到？  
-答：大概率是F_Record-CEP文件夹位置没放对。  
-问：点开始录制后提示“没有找到这个路径”？  
-答：填的路径信息别带引号哦。  
-问：开始录制后图片数一直是零？  
-答：要不然是F_Record-generator文件夹位置没放对，要不然是画布开太大了，它保存得很慢。  
-问：关掉PS后下次还能继续录制吗？  
-答：能，记得点一下继续录制。  
-问：录到一半不想画这幅画了，想换一幅画录，该怎么办？  
-答：再新建一个文件夹，用新的路径就行，以后想画了可以再换回来。  
-问：录制过程中画布被裁剪或者扩张会影响录像吗？  
-答：录像会自行调整。  
-问：缩放、翻转、旋转画布会被记录进录像吗？  
-答：只要改变的仅仅是画布的视图而不是画布本身，就不会被记录。  
-问：有多张画布时录制的是哪一张？  
-答：点开始录制时选中的那一张。  
-问：输出录像的耗时跟什么有关？  
-答：主要取决于你设置的录像时长，然后跟图片数也有点关系，但跟画布尺寸无关。  
-问：输出录像为什么一直卡在0%？  
-答：可能是录像时长设置得太长了。或者是图片数太少了，多等一会儿它就会直接跳到90%。  
-问：输出录像到一半出现undefined错误？  
-答：要不然是你用的第一版并且画布开的很大，这种情况只能把图片放PR之类的剪辑软件里面去导出视频了，要不然是你的过程图片中有损坏的图片，比如某张图片保存到一半的时候你把PS关了（我推测的），这种情况找到损坏的图片删掉就行。  
-## 暂时没解决的问题
-问：F_Record和其它某些插件同时使用时不兼容？  
-答：由于我用的其它PS插件很少，暂时不知道是什么原因。  
-问：插件打开后闪了一下就没了？  
-答：目前反应这个问题的好像都是个别2019版本的，我也不知道为啥，但评论区有人说重下了一个PS就解决了。  
-问：插件会录制到隐藏的图层？  
-答：极少数人会出现这种情况，也不知道原因，猜测是PS的生成器有损坏，也可以尝试重下一个PS。  
-问：录制出来的视频有色差？  
-答：是有一点，我也是经人提醒才发现的，我用的ffmpeg合成视频，但对这个东西我了解的也不多，猜测是颜色空间转化时带来了一点误差，但还不知道咋改。  
+F_Record
+A lightweight Photoshop plugin for recording the drawing process.
+Plugin principle: call the interface of PS generator to capture process images when the canvas changes, and finally connect the images to generate a video.
+Supported versions: PS 2019 and later (thanks to srylyx for helping with compatibility)
+Supported systems: Windows, Mac (only Windows is temporarily available on GitHub)
+Github: https://github.com/F-know/F_Record
+Cloud drive download: https://pan.quark.cn/s/d3aaf46abc5e
+Disclaimer: This plugin does not guarantee that it will work perfectly on any computer without bugs, so for important recording processes, please have a Plan B ready. Otherwise, I am not responsible for any losses incurred, after all, it's free. If you still have questions after reading all the content below, you can DM me on Bilibili (ID: F_know), and I will reply when I see it.
+PS plugin development blog: https://uiscripting.com All the content of this plugin was completed step by step by following the blog of this great guy, taking one week.
+
+Installation Method
+If you have installed version 1.0 before, please delete 1.0 first. Do not split the same drawing process into two versions and record them separately.
+If PS doesn't come with these paths, just create one yourself.
+
+Windows
+Place F_Record-CEP in /Adobe Photoshop/Required/CEP/extensions
+Place F_Record-generator in /Adobe Photoshop/Plug-ins/Generator
+
+Mac
+Place F_Record-CEP in /Users/{username}/Library/Application Support/Adobe/CEP/extensions
+Place F_Record-generator in /Adobe Photoshop/Plug-ins/Generator
+
+Finally, open PS, edit-Preferences-Enable Generator (check), Load extension panels (check), restart PS, in the top column Window-Extensions you can find the plugin.
+
+Introduction to plugin interface parameters
+Path: Fill in the path for saving process images and outputting videos, not the installation location of the plugin. You can create a new folder anywhere and copy the path into it.
+Saved image count: The number of process images saved. It will gradually increase as you proceed with the operation after starting recording.
+Minimum save interval: Used to control the frequency of saving images, usually set to 0. If the canvas is large (e.g., over 5000*5000 pixels, depending on your computer performance), saving images will take longer, so the minimum save interval will be relatively large.
+Recording duration: Used to control the time of the final output video, you can fill it in after recording, it is recommended to be within 5 minutes, which is directly related to the time it takes to generate the video (of course, if you don’t mind waiting a little longer, it’s also ok).
+
+FAQ
+Q: Plugin prompts "not correctly signed"?
+A: Some files inside have been modified or damaged, try downloading it again, if it still doesn't work, you can search on Baidu, there are many solutions online.
+Q: Installed according to the above tutorial, but the plugin was not found in the extensions?
+A: Most likely, the location of the F_Record-CEP folder is wrong.
+Q: After clicking start recording, it prompts "This path was not found"?
+A: Make sure there are no quotation marks in the filled path information.
+Q: After starting recording, the image count has always been zero?
+A: Either the location of the F_Record-generator folder is incorrect, or the canvas is too large, and it saves slowly.
+Q: Can I continue recording next time after closing PS?
+A: Yes, remember to click continue recording.
+Q: I don't want to draw this picture halfway through recording, how can I switch to another picture to record?
+A: Just create a new folder with a new path, and switch back later if you want to draw again.
+Q: Will cropping or expanding the canvas during recording affect the video?
+A: The recording will adjust automatically.
+Q: Will zooming, flipping, or rotating the canvas be recorded in the video?
+A: Only changes to the view of the canvas, not the canvas itself, will not be recorded.
+Q: When there are multiple canvases, which one will be recorded?
+A: The one selected when clicking start recording.
+Q: What affects the time it takes to output the video?
+A: It mainly depends on the recording duration you set, and then it is also related to the number of images, but not related to the canvas size.
+Q: Why does the output video stay at 0% all the time?
+A: It may be because the recording duration is set too long. Or the number of images is too small, wait a little longer, and it will directly jump to 90%.
+Q: Why does "undefined" error occur halfway through outputting the video?
+A: Either you are using the first version and the canvas is very large, in which case you can only export the video in editing software like PR, or there are damaged images in your process images, such as when you closed PS halfway through saving a certain image (my guess), in this case, just find and delete the damaged image.
+
+Unresolved Issues
+Q: Not compatible with F_Record and some other plugins used at the same time?
+A: Since I use very few other PS plugins, I don't know the reason for the time being.
+Q: The plugin flashes and disappears after opening?
+A: Currently, this problem seems to be related to some individual 2019 versions, I don't know why, but someone in the comment section said that downloading another PS solved the problem.
+Q: Will the plugin record hidden layers?
+A: Very few people will encounter this situation, the reason is also unknown, it is speculated that PS generator is damaged, you can also try downloading another PS.
+Q: Will the video recorded have color deviation?
+A: There is a little bit, I also found out from someone's reminder. I use ffmpeg to merge videos, but in color space conversion, but I don't know how to fix it yet.

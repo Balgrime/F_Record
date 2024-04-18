@@ -71,21 +71,21 @@ function startOrStopRecord() {
         try{
             fs.readdirSync(localStorage['savePath']);
         }catch(error){
-            alert('没找到这个路径');
+            alert('Path not found');
             return;
         }
         csInterface.evalScript(`$._ext.sendToGenerator('${JSON.stringify({from: 'panel', action: 'start-record'})}')`);
         btn.classList.remove('topcoat-button--cta');
-        btn.innerHTML = '停止录制';
+        btn.innerHTML = 'Stop recording';
         document.getElementById("clear-btn").style.display='none';
         document.getElementById("output-btn").style.display='none';
     }else{
         csInterface.evalScript(`$._ext.sendToGenerator('${JSON.stringify({from: 'panel', action: 'stop-record'})}')`);
         btn.classList.add('topcoat-button--cta');
         if(document.getElementById("imageCount").innerHTML=="0"){
-            btn.innerHTML = '开始录制';
+            btn.innerHTML = 'Start recording';
         }else{
-            btn.innerHTML = '继续录制';
+            btn.innerHTML = 'Resume recording';
         }
         document.getElementById("clear-btn").style.display='inline';
         document.getElementById("output-btn").style.display='inline';
@@ -128,10 +128,10 @@ function loadImageCount(){
     document.getElementById("imageCount").innerHTML=imageFiles.length;
     if(document.getElementById("start-btn").classList.contains('topcoat-button--cta')){
         if(imageFiles.length == 0){
-            document.getElementById("start-btn").innerHTML="开始录制";
+            document.getElementById("start-btn").innerHTML="Start recording";
         }
         else{
-            document.getElementById("start-btn").innerHTML="继续录制";
+            document.getElementById("start-btn").innerHTML="Resume recording";
         }
     }
 }
@@ -148,7 +148,7 @@ async function outputVideo(){
     try{
         fs.readdirSync(localStorage['savePath']);
     }catch(error){
-        alert('没找到这个路径');
+        alert('Path not found');
         return;
     }
     const save_path = localStorage['savePath'];
@@ -198,17 +198,12 @@ async function outputVideo(){
 
     
     if(localStorage['videoDuration']==''){
-        alert("填一下录像时长呗");
+        alert("Fill in the recording duration, please.");
         return;
     }
     if(imageFiles.length == 0){
-        alert("啥也没有啊，我还能帮你画？");
+        alert("No images found");
         return;
-    }
-    if(imageFiles.length == 917){//magic number
-        if(Math.random()<0.5){
-            alert("祝好~");
-        }
     }
     const jpeg = require('jpeg-js');
     const lastImageData=jpeg.decode(fs.readFileSync(path.join(imageDirectory,imageFiles[imageFiles.length-1])));
@@ -376,9 +371,9 @@ async function outputVideo(){
             }
             await lalala();
             if(imageFiles.length < 1000){
-                alert(`成功生成录像${outputVideo}`);
+                alert(`Video generated successfully ${outputVideo}`);
             }else{
-                alert(`很荣幸见证旷世之作诞生的全过程${outputVideo}`);
+                alert(`Video generated successfully ${outputVideo}`);
             }
         }
         await output_0(0);
@@ -395,7 +390,7 @@ async function outputVideo(){
     }finally{
         btn.style.pointerEvents='auto';
         btn.classList.add('topcoat-button--cta');
-        btn.innerHTML = "输出录像";
+        btn.innerHTML = "Export video";
         document.getElementById("clear-btn").style.pointerEvents='auto';
         document.getElementById("start-btn").style.pointerEvents='auto';
         clearTmp();

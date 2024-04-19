@@ -76,16 +76,16 @@ function startOrStopRecord() {
         }
         csInterface.evalScript(`$._ext.sendToGenerator('${JSON.stringify({from: 'panel', action: 'start-record'})}')`);
         btn.classList.remove('topcoat-button--cta');
-        btn.innerHTML = 'Stop recording';
+        btn.innerHTML = 'Start recording';
         document.getElementById("clear-btn").style.display='none';
         document.getElementById("output-btn").style.display='none';
     }else{
         csInterface.evalScript(`$._ext.sendToGenerator('${JSON.stringify({from: 'panel', action: 'stop-record'})}')`);
         btn.classList.add('topcoat-button--cta');
         if(document.getElementById("imageCount").innerHTML=="0"){
-            btn.innerHTML = 'Start recording';
+            btn.innerHTML = 'Start';
         }else{
-            btn.innerHTML = 'Resume recording';
+            btn.innerHTML = 'Resume';
         }
         document.getElementById("clear-btn").style.display='inline';
         document.getElementById("output-btn").style.display='inline';
@@ -128,10 +128,10 @@ function loadImageCount(){
     document.getElementById("imageCount").innerHTML=imageFiles.length;
     if(document.getElementById("start-btn").classList.contains('topcoat-button--cta')){
         if(imageFiles.length == 0){
-            document.getElementById("start-btn").innerHTML="Start recording";
+            document.getElementById("start-btn").innerHTML="Start";
         }
         else{
-            document.getElementById("start-btn").innerHTML="Resume recording";
+            document.getElementById("start-btn").innerHTML="Resume";
         }
     }
 }
@@ -202,7 +202,7 @@ async function outputVideo(){
         return;
     }
     if(imageFiles.length == 0){
-        alert("No images found");
+        alert("No images found.");
         return;
     }
     const jpeg = require('jpeg-js');
@@ -371,9 +371,9 @@ async function outputVideo(){
             }
             await lalala();
             if(imageFiles.length < 1000){
-                alert(`Video generated successfully ${outputVideo}`);
+                alert(`Video successfully exported ${outputVideo}`);
             }else{
-                alert(`Video generated successfully ${outputVideo}`);
+                alert(`Video successfully exported ${outputVideo}`);
             }
         }
         await output_0(0);
@@ -390,7 +390,7 @@ async function outputVideo(){
     }finally{
         btn.style.pointerEvents='auto';
         btn.classList.add('topcoat-button--cta');
-        btn.innerHTML = "Export video";
+        btn.innerHTML = "Export";
         document.getElementById("clear-btn").style.pointerEvents='auto';
         document.getElementById("start-btn").style.pointerEvents='auto';
         clearTmp();
@@ -399,7 +399,7 @@ async function outputVideo(){
 
 function clearProcessImages(){
 
-    var result = confirm("确认要清除录制过程？\n如果已经输出录像，先确保视频效果满意");
+    var result = confirm("Confirm clearing the recording process? \nIf the video has been exported, make sure you are satisfied with the video effects first.");
     if(!result){
         return;
     }
@@ -407,25 +407,25 @@ function clearProcessImages(){
     try{
         fs.readdirSync(save_path);
     }catch(error){
-        alert('没找到这个路径');
+        alert('Path not found');
         return;
     }
     const imageDirectory = path.join(save_path,'process_images');
     try{
         fs.readdirSync(imageDirectory);
     }catch(error){
-        alert('啥也没有，清了个寂寞');
+        alert('Nothing there, just cleared some loneliness');
         return;
     }
     const files = fs.readdirSync(path.join(save_path,'process_images'));
     if(files.length == 0){
-        alert("啥也没有，清了个寂寞");
+        alert("Nothing there, just cleared some loneliness");
         return;
     }
     const btn = document.getElementById("clear-btn");
     btn.style.pointerEvents='none';
     btn.classList.remove('topcoat-button--cta')
-    btn.innerHTML = "正在清除"
+    btn.innerHTML = "Clearing in progress"
     for(const file of files) {
         const filePath = path.join(save_path,'process_images',file);
         if (path.extname(file).toLowerCase() === '.jpg') {
@@ -433,10 +433,10 @@ function clearProcessImages(){
         }
     }
     loadImageCount();
-    alert("已清空");
+    alert("Cleared");
     btn.style.pointerEvents='auto';
     btn.classList.add('topcoat-button--cta');
-    btn.innerHTML = "清空过程"
+    btn.innerHTML = "Clear"
 }
 
 function loadUserInfo(){
@@ -479,9 +479,9 @@ function setIntInputMinMax(id,mn,mx){
 
 window.addEventListener('load', function(){
     /*持久化*/
-    const event = new CSEvent("com.adobe.PhotoshopPersistent", "APPLICATION");
-    event.extensionId = extId;
-    csInterface.dispatchEvent(event);
+    // const event = new CSEvent("com.adobe.PhotoshopPersistent", "APPLICATION");
+    // event.extensionId = extId;
+    // csInterface.dispatchEvent(event);
 
     syncTheme();
     csInterface.addEventListener('com.adobe.csxs.events.ThemeColorChanged', function(){
